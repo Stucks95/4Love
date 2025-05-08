@@ -1,4 +1,6 @@
 @import './base.css';
+/* @import '@coreui/coreui/dist/css/coreui.min.css'; */
+/* @import 'bootstrap/dist/css/bootstrap.min.css'; */
 
 #app {
   max-width: 1280px;
@@ -7,32 +9,38 @@
   font-weight: normal;
 }
 
+.title {
+  display: flex;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
 }
 
-h1 {
-  text-align: center;
+.pages {
+  display: flex;
 }
 
 nav {
+  background-color: var(--color-background-soft);
+  border-radius: 25px;
   width: 100%;
   font-size: 1.5em;
   text-align: center;
-  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem;
 }
 
 nav a.router-link-exact-active {
   color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+  background-color: var(--color-border-hover);
+  border-radius: 25px;
 }
 
 nav a {
-  display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
@@ -48,12 +56,6 @@ nav a:first-of-type {
 
 a {
   text-decoration: none;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
 }
 
 @media (min-width: 1024px) {
