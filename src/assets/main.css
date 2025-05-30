@@ -1,8 +1,9 @@
-@import './base.css';
+@import 'tailwindcss';
+/*@import './base.css'; */
 /* @import '@coreui/coreui/dist/css/coreui.min.css'; */
 /* @import 'bootstrap/dist/css/bootstrap.min.css'; */
 
-#app {
+/* #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -62,4 +63,4 @@ a {
   #app {
     grid-template-columns: 1fr 1fr;
   }
-}
+} */

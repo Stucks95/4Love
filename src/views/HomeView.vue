@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Home from '@/components/Home.vue'
+</script>
 
 <template>
-  <div class="page home">
-    <h1>This is the Home page</h1>
-  </div>
+  <Home msg="HOME PAGE" />
 </template>
 
 <style scoped></style>

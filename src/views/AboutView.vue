@@ -1,7 +1,8 @@
-<template>
-  <div class="page about">
-    <h1>This is an About page</h1>
-  </div>
-</template>
+<script setup lang="ts">
+import About from '@/components/About.vue'
+</script>
 
-<style></style>
+<template>
+  <h1>porco de dio</h1>
+  <About />
+</template>

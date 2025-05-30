@@ -1,7 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Gallery from '@/components/Gallery.vue'
+</script>
 
 <template>
-  <div class="page gallery">
-    <h1>This is the Gallery page</h1>
-  </div>
+  <Gallery />
 </template>
