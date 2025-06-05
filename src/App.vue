@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue'
+//import Navbar2 from './components/Navbar2.vue'
 import { motion } from 'motion-v'
 </script>
 
@@ -14,6 +15,7 @@ import { motion } from 'motion-v'
       }"
     >
       <Navbar />
+      <!-- <Navbar2 /> -->
     </motion.div>
 
     <div class="pt-14">

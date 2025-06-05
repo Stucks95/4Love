@@ -9,10 +9,10 @@ function getImage(nome: string) {
 }
 
 const isClicked = ref(false)
-const popUpFx = () => {
+/* const overlayFx = () => {
   isClicked.value = !isClicked.value
   console.log('isClicked.value', isClicked.value)
-}
+} */
 
 onMounted(() => {
   isClicked.value = false
@@ -28,15 +28,14 @@ onMounted(() => {
       scale: { scale: 1.05, transition: { duration: 0.5 } },
     }"
   >
-  <div class="home-container" :class="{'bg-slate-800 hover: scale-120': isClicked}">
+  <div class="home-container" :class="{'bg-slate-500 hover: scale-110': isClicked}">
     <div class="home-card py-6">
       <h1 class="pb-6 text-2xl font-bold text-dark-600 justify-self-center">HOME</h1>
       <v-lazy-image
-        class="w-full max-w-200 rounded-lg shadow-lg justify-self-center"
+        class="w-full max-w-150 rounded-lg shadow-lg justify-self-center hover:scale-95 transition duration-800 ease-in-out"
         :key="1"
         :src="getImage('smcf1.jpg')"
         alt="immagine dinamica"
-        @click="popUpFx"
       />
     </div>
   </div>
