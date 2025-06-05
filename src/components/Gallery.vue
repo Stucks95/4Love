@@ -2,6 +2,8 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import infoJson from '../assets/db/info.json'
+import { onMounted } from 'vue'
+import VLazyImage from 'v-lazy-image';
 
 interface Info {
   id: number
@@ -30,7 +32,10 @@ function getInfoPeople() {
 }
 
 getInfoPeople()
-console.log('infoPeople', infoPeople)
+
+onMounted(() => {
+  console.log('infoPeople', infoPeople)
+})
 </script>
 
 <template>
@@ -49,32 +54,32 @@ console.log('infoPeople', infoPeople)
       <h1 class="pb-6 text-2xl font-bold text-dark-600 justify-self-center">GALLERIA</h1>
 
         <div class="pb-6" v-for="info in infoPeople" :key="info.id">
-          <div class="pb-4 img grid grid-cols-3 gap-4 justify-self-center">
-            <img
+          <div class="pb-4 img grid grid-cols-3 gap-4 justify-self-center"
+          v-motion :initial="{ opacity: 0, y: 20 }" :visible="{ opacity: 1, y: 0 }" :variants="{ custom: { scale: 1.1 } }" :delay="200" :duration="1000">
+            <v-lazy-image
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
               :src="getImage(info.photo_names[0])"
               alt="immagine dinamica"
             />
-            <img
+            <v-lazy-image
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
               :src="getImage(info.photo_names[1])"
               alt="immagine dinamica"
             />
-            <img
+            <v-lazy-image
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
               :src="getImage(info.photo_names[2])"
               alt="immagine dinamica"
             />
           </div>
-          <div class="info contents">
+          <div class="info contents bg-amber-500">
             <strong class="text-xl flex justify-center">{{ info.nome }} {{ info.cognome }}</strong>
             <span class="text-xl flex justify-center">{{ info.professione }}</span>
           </div>
       </div>
-
     </div>
 
   </motion.div>

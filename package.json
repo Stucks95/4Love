@@ -16,8 +16,10 @@
     "@coreui/coreui": "^5.3.2",
     "@coreui/vue": "^5.4.1",
     "@tailwindcss/vite": "^4.1.8",
+    "@vueuse/motion": "^3.0.3",
     "bootstrap": "^5.3.6",
     "motion-v": "^1.0.2",
+    "v-lazy-image": "^2.1.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
