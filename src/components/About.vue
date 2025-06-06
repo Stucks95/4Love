@@ -13,7 +13,7 @@ import { motion } from 'motion-v'
       scale: { scale: 1.05, transition: { duration: 0.5 } },
     }"
   >
-  <div class="about-container px-4 py-6 rounded-lg bg-slate-100">
+  <div class="about-container px-4 py-6 rounded-lg bg-slate-200">
     <h1 class="text-2xl font-bold text-dark-600 justify-self-center">CONTATTACI</h1>
     <div class="info contents">
         <strong class="text-xl flex justify-center">siamo 4 ragazzi</strong>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue'
-//import Navbar2 from './components/Navbar2.vue'
+//import Navbar from './components/Navbar.vue'
+import Sidebar from './components/Sidebar.vue'
 import { motion } from 'motion-v'
 </script>
 
 <template>
-  <div class="font-primary">
+  <div class="app-container font-primary">
     <motion.div
       :initial="{ opacity: 0 }"
       :animate="{ opacity: 1 }"
@@ -14,11 +14,11 @@ import { motion } from 'motion-v'
         scale: { scale: 1.05, transition: { duration: 0.5 } },
       }"
     >
-      <Navbar />
-      <!-- <Navbar2 /> -->
+      <!-- <Navbar /> -->
+      <Sidebar />
     </motion.div>
 
-    <div class="pt-14">
+    <div>
       <RouterView />
     </div>
   </div>

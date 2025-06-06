@@ -50,7 +50,7 @@ onMounted(() => {
   >
 
     <!-- PHOTOs -->
-    <div class="gallery-container px-4 py-6 rounded-lg bg-slate-100" >
+    <div class="gallery-container px-4 py-6 rounded-lg bg-slate-200" >
       <h1 class="pb-6 text-2xl font-bold text-dark-600 justify-self-center">GALLERIA</h1>
 
         <div class="pb-6" v-for="info in infoPeople" :key="info.id">

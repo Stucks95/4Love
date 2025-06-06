@@ -3,6 +3,7 @@ import Home from '../components/Home.vue'
 
 
 const router = createRouter({
+  linkActiveClass: 'border-indigo-500',
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {

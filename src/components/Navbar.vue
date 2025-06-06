@@ -3,7 +3,7 @@
   <motion.nav :animate="isOpen ? 'open' : 'closed'" class="border-b shadow-sm fixed top-0 w-full z-50 bg-slate-200 rounded-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
-        <div class="flex items-center">
+        <div class="logo flex items-center">
           <RouterLink to="/">
             <h1 class="text-3xl font-bold text-sky-700 hover:text-sky-500">4Love</h1>
           </RouterLink>
@@ -12,21 +12,21 @@
         <!-- Laptop Menu -->
         <div class="hidden md:flex space-x-4 items-center">
           <RouterLink to="/">
-            <motion.div class="flex text-xl place-items-center text-gray-600 hover:text-blue-600"
+            <motion.div class="flex place-items-center text-gray-600 hover:text-blue-600"
             :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-              <p>HOME</p>
-            </motion.div>
-          </RouterLink>
-          <RouterLink to="/about">
-            <motion.div class="flex text-xl place-items-center text-gray-600 hover:text-blue-600"
-            :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-              <p>CONTATTACI</p>
+              <p class="text-xl font-bold">HOME</p>
             </motion.div>
           </RouterLink>
           <RouterLink to="/gallery">
             <motion.div class="flex text-xl place-items-center text-gray-600 hover:text-blue-600"
             :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-              <p>GALLERIA</p>
+              <p class="text-xl font-bold">GALLERIA</p>
+            </motion.div>
+          </RouterLink>
+          <RouterLink to="/about">
+            <motion.div class="flex text-xl place-items-center text-gray-600 hover:text-blue-600"
+            :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
+              <p class="text-xl font-bold">CONTATTACI</p>
             </motion.div>
           </RouterLink>
         </div>
@@ -72,36 +72,40 @@
         </div>
       </div>
 
-      <motion.div class="background" :variants="sidebarVariants" />
-      <!-- Mobile Menu -->
-      <motion.div :variants="navVariants" v-if="isOpen" class="md:hidden bg-slate-200 pb-4">
-        <RouterLink @click="toggle" to="/" class="text-2xl text-gray-600 hover:text-blue-600">
-          <motion.div class="flex place-items-center pb-2" :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-            <span class="icon-placeholder material-symbols-outlined">home</span>
-            <p class="text-placeholder">HOME</p>
-          </motion.div>
-        </RouterLink>
-        <RouterLink
-          @click="toggle"
-          to="/about"
-          class="text-2xl text-gray-600 hover:text-blue-600"
-        >
-          <motion.div class="flex place-items-center pb-2"  :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-            <span class="icon-placeholder material-symbols-outlined">info</span>
-            <p class="text-placeholder">CONTATTACI</p>
-          </motion.div>
-        </RouterLink>
-        <RouterLink
-          @click="toggle"
-          to="/gallery"
-          class="text-2xl text-gray-600 hover:text-blue-600"
-        >
-          <motion.div class="flex place-items-center pb-2"  :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-            <span class="icon-placeholder material-symbols-outlined">image</span>
-            <p class="text-placeholder">GALLERIA</p>
-          </motion.div>
-        </RouterLink>
-      </motion.div>
+      <Transition name="fade">
+        <div class="fade-fx" v-if="isOpen">
+          <!-- Mobile Menu -->
+          <Transition name="slide">
+            <motion.div :variants="navVariants" v-if="isOpen" class="md:hidden bg-slate-200 pb-4 h-full shadow-lg">
+              <RouterLink @click="toggle" to="/" class="text-2xl text-gray-600 hover:text-blue-600">
+                <motion.div class="flex place-items-center pb-2" :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
+                  <span class="icon-placeholder material-symbols-outlined">home</span>
+                  <p class="text-placeholder text-xl font-bold active-tab">HOME</p>
+                </motion.div>
+              </RouterLink>
+              <RouterLink
+                @click="toggle"
+                to="/gallery"
+                class="text-2xl text-gray-600 hover:text-blue-600">
+                <motion.div class="flex place-items-center pb-2"  :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
+                  <span class="icon-placeholder material-symbols-outlined">image</span>
+                  <p class="text-placeholder text-xl font-bold">GALLERIA</p>
+                </motion.div>
+              </RouterLink>
+              <RouterLink
+                @click="toggle"
+                to="/about"
+                class="text-2xl text-gray-600 hover:text-blue-600">
+                <motion.div class="flex place-items-center pb-2"  :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
+                  <span class="icon-placeholder material-symbols-outlined">info</span>
+                  <p class="text-placeholder text-xl font-bold">CONTATTACI</p>
+                </motion.div>
+              </RouterLink>
+            </motion.div>
+          </Transition>
+
+        </div>
+      </Transition>
     </div>
 
   </motion.nav>
@@ -111,6 +115,7 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { motion } from 'motion-v'
+import type { MotionProps } from 'motion-v'
 
 const isOpen = ref(false)
 
@@ -126,29 +131,15 @@ const navVariants: MotionProps['variants'] = {
     transition: { staggerChildren: 0.05, staggerDirection: -1 }
   }
 }
-
-const sidebarVariants: MotionProps['variants'] = {
-  open: (height: unknown = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-    transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2
-    }
-  }),
-  closed: {
-    clipPath: "circle(30px at 40px 40px)",
-    transition: {
-      delay: 0.2,
-      type: "spring",
-      stiffness: 400,
-      damping: 40
-    }
-  }
-}
 </script>
 
 <style scoped>
+.active-tab {
+  text-decoration: underline;
+  text-decoration-color: var(--color-sky-700);
+  text-decoration-thickness: 3px;
+}
+
 .toggle-container {
   outline: none;
   border: none;
@@ -168,5 +159,27 @@ const sidebarVariants: MotionProps['variants'] = {
 .text-placeholder {
   border-radius: 5px;
   flex: 1;
+}
+
+/* Transizione fade overlay */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Transizione slide sidebar */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.8s ease;
+}
+.slide-enter-from {
+  transform: translateX(-50%);
+}
+.slide-leave-to {
+  transform: translateX(-50%);
 }
 </style>
