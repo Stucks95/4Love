@@ -3,28 +3,27 @@ import Home from '../components/Home.vue'
 
 
 const router = createRouter({
-  linkActiveClass: 'border-indigo-500',
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home,
     },
     {
+      path: '/',
+      redirect: '/home'
+    },
+    {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      // lazy-loading
       component: () => import('../components/About.vue'),
     },
     {
       path: '/gallery',
       name: 'gallery',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      // lazy-loading
       component: () => import('../components/Gallery.vue'),
     },
   ],

@@ -29,28 +29,15 @@
 
       <!-- Laptop Menu -->
       <div class="laptop-menu hidden md:flex space-x-4 absolute top-0 right-0 mr-6 pt-6">
-        <RouterLink to="/">
-          <motion.div class="option-menu text-xl font-bold flex place-items-center text-gray-600 hover:text-blue-600"
-          :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-            HOME
-          </motion.div>
-        </RouterLink>
-        <RouterLink to="/gallery">
-          <motion.div class="option-menu font-bold text-xl place-items-center text-gray-600 hover:text-blue-600"
-          :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-            GALLERIA
-          </motion.div>
-        </RouterLink>
-        <RouterLink to="/about">
-          <motion.div class="option-menu font-bold text-xl place-items-center text-gray-600 hover:text-blue-600"
-          :whileHover="{ scale: 0.95, transition: { duration: 0.5 } }">
-            CONTATTACI
-          </motion.div>
-        </RouterLink>
+        <div v-for="page in pages" :key="page.id">
+          <RouterLink :to="page.name" class="text-xl font-bold flex place-items-center text-gray-600 hover:text-blue-600 hover:scale-95">
+              {{ page.itUppercase }}
+          </RouterLink>
+        </div>
       </div>
     </div>
 
-    <!-- Overlay + Mobile Sidebar -->
+    <!-- Overlay -->
     <Transition name="fade">
       <div
         v-if="isOpen"
@@ -59,49 +46,44 @@
       ></div>
     </Transition>
 
+    <!-- Mobile Sidebar -->
     <Transition name="slide">
-      <aside v-if="isOpen" class="mobile-menu md:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-50 p-6">
+      <aside v-if="isOpen" class="mobile-menu md:hidden fixed left-0 top-0 h-full w-72 bg-white shadow-lg z-50 p-6">
         <h2 class="text-xl font-bold mb-4">Menu</h2>
         <ul class="space-y-2">
-          <li>
-            <RouterLink @click="closeMenu" to="/">
-              <motion.div class="inline-flex pb-2 font-bold text-xl place-items-center text-gray-600 hover:text-blue-600"
-              :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-                <span class="icon-placeholder material-symbols-outlined">home</span>
-                <p class="option-menu">HOME</p>
-              </motion.div>
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink @click="closeMenu" to="/gallery">
-              <motion.div class="inline-flex pb-2 font-bold text-xl place-items-center text-gray-600 hover:text-blue-600"
-              :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-                <span class="icon-placeholder material-symbols-outlined">image</span>
-                <p class="option-menu">GALLERIA</p>
-              </motion.div>
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink @click="closeMenu" to="/about">
-              <motion.div class="inline-flex pb-2 font-bold text-xl place-items-center text-gray-600 hover:text-blue-600"
-              :whileHover="{ scale: 0.98, transition: { duration: 0.5 } }">
-                <span class="icon-placeholder material-symbols-outlined">info</span>
-                <p class="option-menu">CONTATTACI</p>
-              </motion.div>
+          <li v-for="page in pages" :key="page.id">
+            <RouterLink :to="page.name" @click="closeMenu"
+            class="text-xl font-bold flex py-2 text-gray-600 hover:text-blue-600 hover:scale-95 hover:bg-sky-100 hover:opacity-90 rounded">
+                <span class="icon-placeholder material-symbols-outlined">{{ page.iconName }}</span>
+                <p style="font-size: 1.8rem">{{ page.itUppercase }}</p>
             </RouterLink>
           </li>
         </ul>
       </aside>
     </Transition>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { motion } from 'motion-v'
+import router from '@/router'
+
+interface Pages {
+  id: number,
+  name: string,
+  itName: string,
+  itUppercase: string,
+  iconName: string
+}
 
 const isOpen = ref(false)
+const pages: Pages[] = [
+  { id: 0, name: 'home', itName: 'home', itUppercase: 'HOME', iconName: 'home' },
+  { id: 1, name: "gallery", itName: 'galleria', itUppercase: 'GALLERIA', iconName: 'image' },
+  { id: 2, name: 'about', itName: 'contatti', itUppercase: 'CONTATTI', iconName: 'info' },
+]
 
 function toggleMenu() {
   isOpen.value = !isOpen.value
@@ -109,18 +91,16 @@ function toggleMenu() {
 function closeMenu() {
   isOpen.value = false
 }
+
+onMounted(() => {
+  console.log(router.options.routes)
+})
 </script>
 
 <style scoped>
-a.router-link-exact-active .option-menu {
+a.router-link-exact-active {
   color: var(--color-sky-700);
   text-decoration: underline;
-  text-decoration-thickness: 3px;
-}
-
-.active-tab {
-  text-decoration: underline;
-  text-decoration-color: var(--color-sky-700);
   text-decoration-thickness: 3px;
 }
 
@@ -132,10 +112,11 @@ a.router-link-exact-active .option-menu {
 }
 
 .icon-placeholder {
+  text-decoration: none;
   font-size: xx-large;
   border-radius: 50%;
   flex: 40px 0;
-  margin-right: 20px;
+  margin-right: 1rem;
 }
 
 .text-placeholder {
