@@ -1,5 +1,4 @@
 <script setup lang="ts">
-//import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
 import { motion } from 'motion-v'
 </script>
@@ -12,9 +11,7 @@ import { motion } from 'motion-v'
       :transition="{
         duration: 2,
         scale: { scale: 1.05, transition: { duration: 0.5 } },
-      }"
-    >
-      <!-- <Navbar /> -->
+      }">
       <Sidebar />
     </motion.div>
 

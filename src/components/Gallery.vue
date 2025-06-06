@@ -3,7 +3,6 @@
 import { motion } from 'motion-v'
 import infoJson from '../assets/db/info.json'
 import { onMounted } from 'vue'
-import VLazyImage from 'v-lazy-image';
 
 interface Info {
   id: number
@@ -34,7 +33,7 @@ function getInfoPeople() {
 getInfoPeople()
 
 onMounted(() => {
-  console.log('infoPeople', infoPeople)
+  //console.log('infoPeople', infoPeople)
 })
 </script>
 
@@ -56,22 +55,22 @@ onMounted(() => {
         <div class="pb-6" v-for="info in infoPeople" :key="info.id">
           <div class="pb-4 img grid grid-cols-3 gap-4 justify-self-center"
           v-motion :initial="{ opacity: 0, y: 20 }" :visible="{ opacity: 1, y: 0 }" :variants="{ custom: { scale: 1.1 } }" :delay="200" :duration="1000">
-            <v-lazy-image
+            <img
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
-              :src="getImage(info.photo_names[0])"
+              v-lazy="getImage(info.photo_names[0])"
               alt="immagine dinamica"
             />
-            <v-lazy-image
+            <img
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
-              :src="getImage(info.photo_names[1])"
+              v-lazy="getImage(info.photo_names[1])"
               alt="immagine dinamica"
             />
-            <v-lazy-image
+            <img
               class="w-full max-w-50 rounded-lg shadow-lg hover:scale-95 transition-transform duration-300"
               :key="info.id"
-              :src="getImage(info.photo_names[2])"
+              v-lazy="getImage(info.photo_names[2])"
               alt="immagine dinamica"
             />
           </div>
